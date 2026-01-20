@@ -1,3 +1,4 @@
+[![CoVS Verification (RUN A / RUN B)](https://github.com/pierernestomaria-netizen/CoVs-runner/actions/workflows/manual.yml/badge.svg)](https://github.com/pierernestomaria-netizen/CoVs-runner/actions/workflows/manual.yml)
 # CoVS-runner
 
 Deterministic runners for COVS verification (RUN A / RUN B).
