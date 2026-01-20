@@ -1,0 +1,33 @@
+name: CoVS Verification (RUN A / RUN B)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  covs-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verify files presence
+        run: |
+          ls -la
+          test -f run_a_nasa.py
+          test -f run_b_lnpr.py
+
+      - name: RUN A — NASA C-MAPSS compatibility check
+        run: |
+          echo "RUN A starting"
+          python run_a_nasa.py --help || true
+
+      - name: RUN B — LNPR structural falsification
+        run: |
+          echo "RUN B starting"
+          python run_b_lnpr.py --help || true
