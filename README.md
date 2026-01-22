@@ -1,47 +1,39 @@
-[![CoVS Verification (RUN A / RUN B)](https://github.com/pierernestomaria-netizen/CoVs-runner/actions/workflows/manual.yml/badge.svg)](https://github.com/pierernestomaria-netizen/CoVs-runner/actions/workflows/manual.yml)
-# CoVS-runner
+# COVS-runner
 
-Deterministic runners for COVS verification (RUN A / RUN B).
+Deterministic runner for COVS verification (RUN A / RUN B).
 
-This repository contains the **exact, reproducible execution runners**
-used for the COVS (Criterion of Operational Structural Truth) verification.
+This repository contains ONLY canonical, immutable execution artifacts.
+No source code is executed directly from this repository.
 
-There is **no training, tuning, or optimization**.
-The runners are deterministic and produce binary outcomes (PASS / FAIL).
-## Files
+## Contents
 
-- `run_a_nasa.py`
-RUN A — Empirical compatibility check on NASA C-MAPSS FD001.
+- run_a__covs__v1.0.1-canonical.zip  
+  Canonical implementation of RUN A (OAR)
 
-- `run_b_lnpr.py`
-RUN B — Structural falsification check (LNPR).
-## Requirements
+- run_b__covs__v1.0.2-canonical.zip  
+  Canonical implementation of RUN B (OCN / OII / ONO)
 
-- Python >= 3.9 (tested with 3.11)
-- ASCII-only environment
-- No GPU required
-- No external services
-- No randomness (fully deterministic)
-## Dataset (NASA C-MAPSS)
+- executor__covs__v1.0.2-canonical.zip  
+  Dataset preparation + negative control (random walk)
 
-RUN A and RUN B are designed to operate on the **NASA C-MAPSS FD001 dataset**.
+- .github/workflows/  
+  GitHub Actions pipeline for deterministic verification
 
-The dataset must be obtained from the official NASA source
-and placed locally by the user.
+## Execution Model
 
-Expected files (example):
+- ZIPs are NOT unpacked manually
+- Execution is performed ONLY via CI
+- All constants are preregistered
+- All outputs are PASS / FAIL only
+- No training, tuning, or optimization
 
-- `train_FD001.txt`
-- `test_FD001.txt`
-- `RUL_FD001.txt`
+## Verification
 
-The dataset is **NOT included** in this repository.
-## Execution
+The green badge indicates that:
+- All ZIP hashes are verified
+- The negative control fails correctly
+- RUN A and RUN B execute deterministically
+- Results are reproducible
 
-### RUN A — NASA C-MAPSS
-
-```bash
-python run_a_nasa.py \
---train train_FD001.txt \
---test test_FD001.txt \
---rul RUL_FD001.txt
+Any modification to ZIP files or workflow
+INVALIDATES the verification.
